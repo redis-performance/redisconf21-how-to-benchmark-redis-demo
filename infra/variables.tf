@@ -13,7 +13,7 @@ variable "setup_name" {
 
 variable "instance_ami" {
   description = "AMI for aws EC2 instance - us-east-2	focal	20.04 LTS	arm64	hvm:ebs-ssd	20210325"
-  default     = "ami-06e64809872e814b0"
+  default     = "ami-0d08090d8aaa341cd"
 }
 
 variable "grafana_ami" {
