@@ -45,7 +45,6 @@ resource "aws_instance" "grafana_server" {
   # Deployment related
   ################################################################################
 
-
   ##############
   # Prometheus #
   ##############
@@ -59,4 +58,13 @@ resource "aws_instance" "grafana_server" {
   provisioner "local-exec" {
     command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ${var.ssh_user} --private-key ${var.private_key} ./playbooks/common/grafana.yml -i ${self.public_ip}, --extra-vars \"prometheus_web_listen_address=${self.public_ip}:9090\""
   }
+
+
+  ################################
+  # Install grafana redis-plugin #
+  ################################
+  provisioner "local-exec" {
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ${var.ssh_user} --private-key ${var.private_key} ./playbooks/common/grafana-redis-datasource.yml -i ${self.public_ip},"
+  }
+
 }
