@@ -1,0 +1,12 @@
+---
+- name: Install prometheus using snapd
+  hosts: all
+  connection: ssh
+  become: yes
+  become_user: root
+  become_method: sudo 
+  tasks:
+  
+  - name: Install prometheus
+    become: yes
+    command: snap install prometheus
