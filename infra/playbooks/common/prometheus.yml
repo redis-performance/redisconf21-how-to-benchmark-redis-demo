@@ -1,0 +1,24 @@
+---
+- hosts: all
+  connection: ssh
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+  - cloudalchemy.prometheus
+  vars:
+    prometheus_scrape_configs:
+      - job_name: 'node-exporter'
+        ec2_sd_configs:
+          - region: "{{ lookup('env','EC2_REGION') }}"
+            access_key: "{{ lookup('env','EC2_ACCESS_KEY') }}"
+            secret_key: "{{ lookup('env','EC2_SECRET_KEY') }}"
+            port: 9100
+        relabel_configs:
+            # Only monitor instances with a Name starting with "redisconf"
+          - source_labels: [__meta_ec2_tag_Name]
+            regex: redisconf.*
+            action: keep
+            # Use the instance ID as the instance label
+          - source_labels: [__meta_ec2_instance_id]
+            target_label: instance

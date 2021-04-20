@@ -43,4 +43,12 @@ resource "aws_instance" "client" {
   ################################################################################
   # Deployment related
   ################################################################################
+
+  #########################
+  # Install node exporter #
+  #########################
+  provisioner "local-exec" {
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ${var.ssh_user} --private-key ${var.private_key} ./playbooks/common/node-exporter.yml -i ${self.public_ip},"
+  }
+  
 }
