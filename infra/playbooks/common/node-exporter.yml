@@ -1,5 +1,5 @@
 ---
-- name: Install prometheus using snapd
+- name: Install node exporter
   hosts: all
   connection: ssh
   become: yes
@@ -7,6 +7,11 @@
   become_method: sudo 
   tasks:
   
-  - name: Install prometheus
+  - name: Update
     become: yes
-    command: snap install prometheus
+    command: apt update
+
+  - name: Install prometheus-node-exporter
+    become: yes
+    command: apt install prometheus-node-exporter -y
+

@@ -1,0 +1,13 @@
+---
+- name: Install grafana redis-datasource
+  hosts: all
+  connection: ssh
+  become: yes
+  become_user: root
+  become_method: sudo 
+  tasks:
+  
+  - name: Install grafana redis-datasource
+    become: yes
+    command: grafana-cli plugins install redis-datasource
+
