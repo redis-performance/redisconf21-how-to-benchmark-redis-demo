@@ -48,6 +48,16 @@ grafana_server_public_ip = [
 Save that info because you will need those internal and external IP addresses for the next steps and during the benchmark.
 
 ## Step 2 Configure Grafana Redis Plugin
+
+You can install grafana redis datasource using grafana-cli within the grafana VM
+```
+# ssh into grafana machine
+# then execute the following
+grafana-cli plugins install redis-datasource
+```
+
+For how to configure take a look at https://grafana.com/grafana/plugins/redis-datasource/ :)
+
 ## Step 3 Follow along and fill-in the sample report
 
 Within the `demo-report.pdf` file, you have some sample pre-benchmark steps, benchmark commands, and expected info to be stored when producing a sample benchmark report.
