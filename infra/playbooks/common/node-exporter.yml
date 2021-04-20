@@ -7,7 +7,11 @@
   become_method: sudo 
   tasks:
   
-  - name: Install prometheus
+  - name: Update
     become: yes
-    command: apt install prometheus-node-exporter
+    command: apt update
+
+  - name: Install prometheus-node-exporter
+    become: yes
+    command: apt install prometheus-node-exporter -y
 
